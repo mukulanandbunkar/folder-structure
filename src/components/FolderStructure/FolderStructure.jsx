@@ -25,7 +25,9 @@ const RenderBtn = ({ ele, index, initialSt, setStructure }) => {
     });
   };
   return (
-    <div style={{ background: "pink", margin: "5px", cursor: "pointer" }}>
+    <div
+      style={{ background: "#c4c4c4", margin: "0px 5px", cursor: "pointer" }}
+    >
       <div
         onMouseEnter={() => setDisplay("flex")}
         onMouseLeave={() => setDisplay("none")}
@@ -72,12 +74,12 @@ const GetFolderSt = ({ st, id, initialSt, setStructure }) => {
     return (
       <div
         key={`${id}${index}`}
-        style={{ paddingLeft: "10px", display: "flex" }}
+        style={{ display: "flex", alignItems: "baseline" }}
       >
-        {ele.type === "folder" && (
+        {ele.type === "folder" && ele?.content?.length && (
           <button
             key={`${id}${index}`}
-            style={{ maxHeight: "27px" }}
+            style={{ height: "100%" }}
             onClick={() =>
               updateShow({
                 ...show,
@@ -98,7 +100,7 @@ const GetFolderSt = ({ st, id, initialSt, setStructure }) => {
                 index={index}
               />
             }
-            <div style={{ paddingLeft: "25px" }}>
+            <div>
               {show[`${id}${index}`] && (
                 <GetFolderSt
                   key={`${id}${index}`}
@@ -113,12 +115,11 @@ const GetFolderSt = ({ st, id, initialSt, setStructure }) => {
         ) : (
           <div
             style={{
-              background: ele.type === "folder" ? "pink" : "yellow",
+              background: ele.type === "folder" ? "#c4c4c4" : "#b98d74",
               margin: "10px",
               width: "300px",
             }}
           >
-          
             {ele.type === "folder" ? (
               <RenderBtn
                 initialSt={initialSt}
@@ -197,6 +198,28 @@ function FolderStructure() {
     <div className="folder-structure">
       <h1>Folder Structure</h1>
       <h6>hover over the folder below to create new</h6>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div
+          style={{
+            height: "10px",
+            width: "10px",
+            borderRadius: "50%",
+            background: "#c4c4c4",
+          }}
+        ></div>
+        <p>folder</p>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+        <div
+          style={{
+            height: "10px",
+            width: "10px",
+            borderRadius: "50%",
+            background: "#b98d74",
+          }}
+        ></div>
+        <p>file</p>
+      </div>
       {
         <GetFolderSt
           st={initialSt}
